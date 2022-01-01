@@ -27,7 +27,7 @@
       <![endif]-->
     </head>
 
-    <body style="background-image: url('asset/img/emtop_principal.jpg'); background-size: cover;">
+    <body style="background-image: url('asset/img/emtop.jpg'); background-size: cover;">
 
       <div class="container">
 
@@ -75,32 +75,18 @@
         var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
 
         // Open (or create) the database
-        var open = indexedDB.open("SAC", 1);
+        var open = indexedDB.open("EMTOP", 1);
         
         // Create the schema
         open.onupgradeneeded = function() {
             var db = open.result;
-            if (!db.objectStoreNames.contains('clientes')) {
-                const box1 = db.createObjectStore("clientes", { keyPath: "CLI_ID" });
-            }
-            if (!db.objectStoreNames.contains('usuariocliente')) {
-                const box4 = db.createObjectStore("usuariocliente", { keyPath: "USC_ID" });
-            }
-            if (!db.objectStoreNames.contains('catalogo')) {
-                const box2 = db.createObjectStore("catalogo", { keyPath: "CAT_ID" });
-            }
-            if (!db.objectStoreNames.contains('usuarios')) {
-                const box3 = db.createObjectStore("usuarios", { keyPath: "USU_ID" });
-            }
-            if (!db.objectStoreNames.contains('apiusuarios')) {
-                const box3 = db.createObjectStore("apiusuarios", { keyPath: "USU_ID" });
-            }
+            
         };
 
         open.onsuccess = function(){
             var idb = open.result;
             idb.close();
-            indexedDB.deleteDatabase("SAC");
+            indexedDB.deleteDatabase("EMTOP");
         };
       </script>
      <!-- end: Javascript -->

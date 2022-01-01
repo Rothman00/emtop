@@ -32,36 +32,31 @@ class Emtop extends BaseController
 	public function login()
 	{
 		if($this->session->has('usuario')){
-			$resp = ["rol"=>$this->session->get("rol"), "ref"=>$this->session->get("usuario")->USU_REFERENCIA];
-			$respU=["usuario"=>$this->session->get("usuario")];
-			$respR=["rutas"=>$this->session->get("rutas")];
-			return view("layouts/header", $respU).view("layouts/aside", $respR).view("layouts/body", $resp).view("layouts/footer");
-		}
-		$usuario=isset($_POST['usuario']) ? $_POST['usuario'] : "";
-		$contra=isset($_POST['contra']) ? $_POST['contra'] : "";
-		$dataUP = array(
-            "USU_USUARIO" => $usuario,
-            "USU_PASSWORD" => $contra,
-			"TIPO" => true
-        );
-		$resp = $this->model->postEnvio("/gestion/login", $dataUP);
-		if($resp!=NULL){
-		    if($resp[0]){
-				$ref = array("USU_REFERENCIA" => $resp[1]);
-    			$usuario = $this->model->postEnvio("/gestion/su",$ref);
-    			if($usuario!=null){
-    			    $rutas = $this->model->postEnvio("/gestion/r",$ref);
-					$rol = $this->model->postEnvio("/gestion/srol",$ref);
-    				$this->session->set(["usuario"=>$usuario]);
-    				$this->session->set(["rutas"=>$rutas]);
-					$this->session->set(["rol"=>$rol[0]]);
-					$resp = ["rol"=>$this->session->get("rol"), "ref"=>$this->session->get("usuario")->USU_REFERENCIA];
-					$respU=["usuario"=>$this->session->get("usuario")];
-					$respR=["rutas"=>$this->session->get("rutas")];
-    				return view("layouts/header", $respU).view("layouts/aside", $respR).view("layouts/body", $resp).view("layouts/footer");
-    			}
-    		}
-		}
-		return view('login/login', ["error"=>true]);
-	}
+            $asideD = [
+                "usuario"=>$this->session->get('usuario'),
+                "rutas"=>$this->session->get('rutas'),
+                "roles"=>$this->session->get('roles')
+            ];
+            return view('layouts/header').view('layouts/aside', $asideD).view('layouts/body').view('layouts/footer');
+        }
+        if(!isset($_POST['user']) && !isset($_POST['pass']))
+            return $this->login();
+        $resp = $this->model->login($_POST['user'], $_POST['pass']);
+        if($resp["ESTATUS"] == "CORRECTO"){
+            $this->session->set([
+                "usuario" => $resp["DATOS"],
+                "rutas" => (array) $resp["RUTAS"],
+                "roles" => $resp["ROLES"]
+            ]);
+            $asideD = [
+                "usuario" => $this->session->get('usuario'),
+                "rutas" => $this->session->get('rutas'),
+                "roles" => $this->session->get('roles')
+            ];
+            return view('layouts/header').view('layouts/aside', $asideD).view('layouts/body').view('layouts/footer');
+        }else{
+            echo '<script language="javascript">alert("'.$resp["ESTATUS"].'");</script>';
+            return $this->login();
+        }
+    }
 }
