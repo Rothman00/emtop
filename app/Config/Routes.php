@@ -31,7 +31,16 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Emtop::index');
+
+//      RUTAS API GLOBAL
+$routes->post('/api/login',     'Api::loginData');
+
+//      RUTAS WEB APLICATION
+$routes->get('/',               'Emtop::index');
+$routes->get('/logout',         'Emtop::destruirSession');
+$routes->post('/home',          'Emtop::login');
+$routes->get('/home',           'Emtop::login');
+$routes->get('/escuderia',      'Emtop::puntoVenta');
 
 /*
  * --------------------------------------------------------------------

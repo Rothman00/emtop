@@ -29,34 +29,60 @@ class Emtop extends BaseController
 		return view('login/login');
     }
 
-	public function login()
-	{
+	public function login(){
 		if($this->session->has('usuario')){
             $asideD = [
                 "usuario"=>$this->session->get('usuario'),
                 "rutas"=>$this->session->get('rutas'),
                 "roles"=>$this->session->get('roles')
             ];
-            return view('layouts/header').view('layouts/aside', $asideD).view('layouts/body').view('layouts/footer');
+            return view('layouts/header', $asideD).view('layouts/aside', $asideD).view('pages/home').view('layouts/footer');
         }
-        if(!isset($_POST['user']) && !isset($_POST['pass']))
-            return $this->login();
-        $resp = $this->model->login($_POST['user'], $_POST['pass']);
-        if($resp["ESTATUS"] == "CORRECTO"){
+        $datos=array();
+        if(isset($_POST['user']) && isset($_POST['pass'])){
+            $datos["USUARIO"]=$_POST['user'];
+            $datos["PASSWORD"]=$_POST['pass'];
+        }else
+            return view('login/login');
+        $datos = [
+            "USUARIO"=>isset($_POST['user']) ? $_POST['user'] : "",
+            "PASSWORD"=>isset($_POST['pass']) ? $_POST['pass'] : ""
+        ];
+        $resp = $this->model->getDataPOST_JSON('/api/login',$datos);
+        if($resp->code==200){
             $this->session->set([
-                "usuario" => $resp["DATOS"],
-                "rutas" => (array) $resp["RUTAS"],
-                "roles" => $resp["ROLES"]
+                "usuario" => $resp->data->DATOS,
+                "rutas" => (array) $resp->data->RUTAS,
+                "roles" => $resp->data->ROLES
             ]);
             $asideD = [
                 "usuario" => $this->session->get('usuario'),
                 "rutas" => $this->session->get('rutas'),
                 "roles" => $this->session->get('roles')
             ];
-            return view('layouts/header').view('layouts/aside', $asideD).view('layouts/body').view('layouts/footer');
+            return view('layouts/header', $asideD).view('layouts/aside', $asideD).view('pages/home').view('layouts/footer');
         }else{
-            echo '<script language="javascript">alert("'.$resp["ESTATUS"].'");</script>';
-            return $this->login();
+            if(isset($resp->msj)){
+                echo '<script language="javascript">alert("'.$resp->msj.'");</script>';
+                return view('login/login');
+            }else{
+                echo '<script language="javascript">alert("ERROR EN CONSULTA");</script>';
+                return view('login/login');
+            }
+        }
+    }
+
+    public function puntoVenta()
+    {
+        if($this->session->has('usuario')){
+            $asideD = [
+                "usuario"=>$this->session->get('usuario'),
+                "rutas"=>$this->session->get('rutas'),
+                "roles"=>$this->session->get('roles')
+            ];
+            return view('layouts/header', $asideD).view('layouts/aside', $asideD).view('pages/puntoventa').view('layouts/footer');
+        }else{
+            return view('login/login');
         }
     }
 }

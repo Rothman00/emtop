@@ -19,7 +19,7 @@
   <link rel="stylesheet" type="text/css" href="<?php echo base_Url()?>/asset/css/style.css">
   <!-- end: Css -->
 
-  <link rel="shortcut icon" href="<?php echo base_Url()?>/asset/img/emtop.jpg">
+  <link rel="shortcut icon" href="<?php echo base_Url()?>/asset/img/sinfondo.png">
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -27,22 +27,22 @@
       <![endif]-->
     </head>
 
-    <body style="background-image: url('asset/img/emtop.jpg'); background-size: cover;">
+    <body style="background-image: url('asset/img/fondo1.jpg'); background-size: cover;">
 
       <div class="container">
 
-        <form class="form-signin" action="<?php echo base_Url();?>/inicio" method="post">
+        <form class="form-signin" action="<?php echo base_Url();?>/home" method="post">
           <div class="panel periodic-login">
               <div class="panel-body text-center">
                   <h1></h1><strong><p class="element-name">Sistema de Administración</p></strong></h1>
                   <i class="icons icon-arrow-down"></i>
                   <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                    <input type="text" class="form-text" name="usuario" id="usuario" required>
+                    <input type="text" class="form-text" name="user" id="user" required>
                     <span class="bar"></span>
                     <label>Usuario</label>
                   </div>
                   <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                    <input type="password" class="form-text" name="contra" id="contra" required>
+                    <input type="password" class="form-text" name="pass" id="pass" required>
                     <span class="bar"></span>
                     <label>Contraseña</label>
                   </div>
