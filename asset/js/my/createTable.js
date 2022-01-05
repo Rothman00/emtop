@@ -41,6 +41,7 @@ function generarFichaTecnica(data) {
                             <tr>
                                 <th>Código</th>
                                 <th>Producto</th>
+                                <th>Descripción</th>
                                 <th>Imagen</th>
                                 <th>Puntos</th>
                                 <th>Acción</th>
@@ -53,17 +54,22 @@ function generarFichaTecnica(data) {
                         <td style="color:#000000;">${d["CODIGO"]??''}</td>
                         <td style="color:#000000;">${d["NOMBRE"]??''}</td>
                         <td style="color:#000000;">
+                            <button type="button" class="btn btn-circle btn-mn btn-secondary" data-toggle="modal" data-target="#mostrardescripcion" onclick="cargarDescripcion('${d["DESCRIPCION"]??''}');">
+                                <i class="icons icon-speech"></i>
+                            </button>
+                        </td>
+                        <td style="color:#000000;">
                             <button type="button" class="btn btn-circle btn-mn btn-success" data-toggle="modal" data-target="#mostrarImagen" onclick="cargarImagen('${d["LINK"]??''}');">
                                 <i class="icons icon-picture"></i>
                             </button>
                         </td>
                         <td style="color:#000000;">
                             <button type="button" class="btn btn-circle btn-mn btn-info" data-toggle="modal" data-target="#mostrarPuntos" onclick="cargarPuntos('${d["EXTRAS"]??''}', '${d["FECHADESDE"]??''}', '${d["FECHAHASTA"]??''}');">
-                                <i class="icons icon-picture"></i>
+                                <i class="icons icon-trophy"></i>
                             </button>
                         </td>
                         <td style="color:#000000;">
-                            <button type="button" class="btn btn-circle btn-mn btn-warning" data-toggle="modal" data-target="#fichaModel" onclick="cargarFichaTecnica('${d["CODIGO"]??''}','${d["NOMBRE"]??''}','${d["DESCRIPCION"]??''}','${d["EXTRAS"]??''}','${d["FECHADESDE"]??''}','${d["FECHAHASTA"]??''}','${d["LINK"]??''}');">
+                            <button type="button" class="btn btn-circle btn-mn btn-warning" data-toggle="modal" data-target="#fichatecnicaModel" onclick="cargarFichaTecnica('${d["CODIGO"]??''}','${d["NOMBRE"]??''}','${d["DESCRIPCION"]??''}','${d["EXTRAS"]??''}','${d["FECHADESDE"]??''}','${d["FECHAHASTA"]??''}','${d["LINK"]??''}');">
                                 <i class="icons icon-settings"></i>
                             </button>
                             <button type="button" class="btn btn-circle btn-mn btn-danger" onclick="deleteFichaTecnica('${d["CODIGO"]}');">

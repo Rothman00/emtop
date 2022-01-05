@@ -61,7 +61,7 @@
                                     </span>
                                 </div>
                                 <div class="col-sm-12">
-                                    <progress value="0" max="100" id="progress"></progress>
+                                    <span class="obligatorio">Subiendo: </span><progress value="0" max="100" id="progress"></progress>
                                 </div>
                             </center>
                         </div>
@@ -76,6 +76,11 @@
                             <div class="col-sm-9">
                                 <input type="number" class="form-control primary" id="puntos" step="0.01" min="0" placeholder="0 %" onchange="activarFecha(this.value);">
                             </div>
+                            <center>
+                                <div class="col-sm-12">
+                                    <span class="obligatorio">Dejar vacio si no quiere agregar puntos extras al producto</span>
+                                </div>
+                            </center>
                         </div>
                         <div class="row form-group form-animate">
                             <label class="col-sm-3 control-label text-right">DESDE <span class="obligatorio">*</span></label>
@@ -106,10 +111,37 @@
                 </div>
             </div>
         </div>
-        <!--FIN MODAL NUEVO CLIENTE-->
+        <!--FIN MODAL NUEVO FICHA TÉCNICA-->
+
+        <!--MODAL MOSTRAR DESCRIPCIÓN-->
+        <div class="modal fade" id="mostrardescripcion" tabindex="-1" aria-labelledby="exampleModalToggleLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Descripción</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row form-group">
+                            <label class="col-sm-3 control-label text-right">DESCRIPCIÓN </label>
+                            <div class="col-sm-9">
+                                <textarea type="text" class="form-control primary" id="descripcionM" rows="3" disabled></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-10 text-right">
+                                <button class="btn btn-round btn-light" data-toggle="modal" data-target="#mostrardescripcion"><i class="mdi mdi-close icon-sm btn-icon-prepend"></i> Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--FIN MODAL MOSTRAR DESCRIPCIÓN-->
 
         <!--MODAL MOSTRAR IMAGEN-->
-        <div class="modal fade" id="cargarImagen" tabindex="-1" aria-labelledby="exampleModalToggleLabel" aria-hidden="true">
+        <div class="modal fade" id="mostrarImagen" tabindex="-1" aria-labelledby="exampleModalToggleLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -121,7 +153,7 @@
                         <div class="row">
                             <div class="col-sm-1"></div>
                             <div class="col-sm-10 text-right">
-                                <button class="btn btn-round btn-light" data-toggle="modal" data-target="#cargarImagen"><i class="mdi mdi-close icon-sm btn-icon-prepend"></i> Cancelar</button>
+                                <button class="btn btn-round btn-light" data-toggle="modal" data-target="#mostrarImagen"><i class="mdi mdi-close icon-sm btn-icon-prepend"></i> Cancelar</button>
                             </div>
                         </div>
                     </div>
@@ -131,7 +163,7 @@
         <!--FIN MODAL MOSTRAR IMAGEN-->
 
         <!--MODAL MOSTRAR PUNTOS EXTRAS-->
-        <div class="modal fade" id="cargarPuntos" tabindex="-1" aria-labelledby="exampleModalToggleLabel" aria-hidden="true">
+        <div class="modal fade" id="mostrarPuntos" tabindex="-1" aria-labelledby="exampleModalToggleLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -160,7 +192,7 @@
                         <div class="row">
                             <div class="col-sm-1"></div>
                             <div class="col-sm-10 text-right">
-                                <button class="btn btn-round btn-light" data-toggle="modal" data-target="#cargarPuntos"><i class="mdi mdi-close icon-sm btn-icon-prepend"></i> Cancelar</button>
+                                <button class="btn btn-round btn-light" data-toggle="modal" data-target="#mostrarPuntos"><i class="mdi mdi-close icon-sm btn-icon-prepend"></i> Cancelar</button>
                             </div>
                         </div>
                     </div>

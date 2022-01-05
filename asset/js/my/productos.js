@@ -6,9 +6,13 @@ function activarFecha(valor) {
         $('#desde').removeAttr('disabled');
         $('#hasta').removeAttr('disabled');
     }else{
-        $('#desde').attr('disabled', 'disabled');
-        $('#hasta').attr('disabled', 'disabled');
+        $('#desde').attr('disabled', 'disabled').val('');
+        $('#hasta').attr('disabled', 'disabled').val('');
     }
+}
+
+function cargarDescripcion(des) {
+    $('#descripcionM').val(des);
 }
 
 function cargarImagen(link) {
@@ -16,9 +20,16 @@ function cargarImagen(link) {
 }
 
 function cargarPuntos(ext, des, has) {
-    $('#puntosM').val(ext);
-    $('#desdeM').val(des);
-    $('#hastaM').val(has);
+    if(ext!=''){
+        $('#puntosM').val(ext);
+        $('#desdeM').val(des);
+        $('#hastaM').val(has);
+    }else{
+        $('#puntosM').val('');
+        $('#desdeM').val('');
+        $('#hastaM').val('');
+        alert("ESTE PRODUCTO NO CUENTA CON PUNTOS EXTRAS");
+    }
 }
 
 function nuevoProducto() {
@@ -32,7 +43,7 @@ function cargarFichaTecnica(cod, nom, des, ext, ded, has, lin) {
     $('#codigo').val(cod);
     $('#producto').val(nom);
     $('#imagenClass').attr("placeholder", lin);
-    $('#imagenClass').val(nom);
+    $('#imagenClass').val(lin);
     $('#descripcion').val(des);
     if(ext != ''){
         $('#puntos').val(ext);
@@ -188,6 +199,7 @@ function productoInsert(cod, pro, fil, des, pun, ded, has) {
                 });
                 vaciarCajas();
                 alert("CORRECTO");
+                $('#fichatecnicaModel').modal('toggle');
             }
         } else {
             if(optProducto){
@@ -202,6 +214,7 @@ function productoInsert(cod, pro, fil, des, pun, ded, has) {
                 });
                 vaciarCajas();
                 alert("CORRECTO");
+                $('#fichatecnicaModel').modal('toggle');
             }else{
                 cambiarEstadoInput("codigo", false);
                 alert("CODIGO DE FICHA TÉCNICA YA EXISTE");
