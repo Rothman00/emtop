@@ -42,6 +42,7 @@
      <!-- my -->
      <script src="<?php echo base_Url()?>/asset/js/my/createTable.js"></script>
      <script src="<?php echo base_Url()?>/asset/js/my/puntoventa.js"></script>
+     <script src="<?php echo base_Url()?>/asset/js/my/productos.js"></script>
 
 
     <script type="text/javascript">
@@ -75,9 +76,35 @@
                     }, 250);
                 });
             }
+            //FICHA TÉCNICA
+            let datosFichatec=[];
+            if ($('#tableFichaTecnica').length > 0) {
+                var starCountRef = firebase.database().ref('tbl_fichatecnica');
+                starCountRef.on('value', (snapshot) => {
+                    if(snapshot.exists()){
+                        datosFichatec=[];
+                        const data = snapshot.val();
+                        for (const key in data) {
+                            const element = data[key];
+                            element.CODIGO = key;
+                            datosFichatec.push(element);
+                        }
+                    }
+                    setTimeout(function(){
+                        $('#tableFichaTecnica').html(generarFichaTecnica(datosFichatec));
+                        $('#datatables-generic0').DataTable({
+                            "scrollX": true,
+                            dom: 'Bfrtip',
+                            buttons: [
+                                'copy', 'csv', 'excel', 'pdf', 'print'
+                            ]
+                        });
+                    }, 250);
+                });
+            }
             
             //ELEMENTOS ADICIONALES
-
+            $('.dateAnimate').bootstrapMaterialDatePicker({ weekStart : 0, time: false, animation:true, minDate:new Date()});
         });
 
       (function(jQuery){

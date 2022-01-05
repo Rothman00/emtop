@@ -65,7 +65,7 @@
                         <div class="row form-group">
                             <label class="col-sm-3 control-label text-right">PUNTOS <span class="obligatorio">*</span></label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control primary" id="puntos" step="1" min="0">
+                                <input type="number" class="form-control primary" id="puntos" step="1" min="0" placeholder="0">
                             </div>
                         </div>
                         <center>
@@ -77,7 +77,7 @@
                         <div class="row">
                             <div class="col-sm-1"></div>
                             <div class="col-sm-10 text-right">
-                                <button type="button" class="btn btn-round btn-primary" onclick="guardarEscuderia();" data-toggle="modal" data-target="#escuderiaModal"><i class="mdi mdi-account-plus"></i> Guardar </button>
+                                <button type="button" class="btn btn-round btn-primary" onclick="guardarEscuderia();"> Guardar </button>
                                 <button class="btn btn-round btn-light" data-toggle="modal" data-target="#escuderiaModal"><i class="mdi mdi-close icon-sm btn-icon-prepend"></i> Cancelar</button>
                             </div>
                         </div>

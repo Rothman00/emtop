@@ -41,6 +41,7 @@ $routes->get('/logout',         'Emtop::destruirSession');
 $routes->post('/home',          'Emtop::login');
 $routes->get('/home',           'Emtop::login');
 $routes->get('/escuderia',      'Emtop::puntoVenta');
+$routes->get('/fichatecnica',      'Emtop::productos');
 
 /*
  * --------------------------------------------------------------------

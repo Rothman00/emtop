@@ -3,15 +3,15 @@ let opt = true;
 
 function nuevoEscuderiaOption() {
     opt = true;
-    vaciarDatos(true);
+    vaciarDatos();
 }
 
 function cargarEscuderiaOption(esc, ciu, dir, adm, pun) {
     opt = false;
+    vaciarDatos();
     $('#escuderia').val(esc);
     $('#direccion').val(dir);
     $('#puntos').val(pun);
-    llenadoDatos();
     $("#escuderia").prop("disabled",true);
     setTimeout(function(){
         $("#ciudad").val(ciu).trigger('change.select2');
@@ -19,15 +19,19 @@ function cargarEscuderiaOption(esc, ciu, dir, adm, pun) {
     }, 500);
 }
 
-function vaciarDatos(opcion) {
+function vaciarDatos() {
     $("#escuderia").prop("disabled",false);
     $('#escuderia').val('');
+    cambiarEstadoInput("escuderia", true);
     $('#direccion').val('');
+    cambiarEstadoInput("direccion", true);
     $('#puntos').val('');
+    cambiarEstadoInput("puntos", true);
     llenadoDatos();
 }
 
 function llenadoDatos() {
+    cambiarEstadoInput("ciudad", true);
     $('#ciudad').html('<option value="-1">ESPERE ...</option>');
     const dbRef = firebase.database().ref();
     dbRef.child("tbl_ciudad").get().then((snapshot) => {
@@ -43,6 +47,7 @@ function llenadoDatos() {
     }).catch((error) => {
         alert(`No se pudo realizar este proceso, vuelva a intentar\n${error}`);
     });
+    cambiarEstadoInput("admin", true);
     $('#admin').html('<option value="-1">SELECCIONAR</option>');
     for (const key in datosUsuarios) {
         const element = datosUsuarios[key];
@@ -102,6 +107,7 @@ function guardarEscuderia() {
                             PUNTOS: pun,
                             ESTADO: true
                         });
+                        vaciarDatos();
                         alert("CORRECTO");
                     }
                 } else {
@@ -113,6 +119,7 @@ function guardarEscuderia() {
                             PUNTOS: pun,
                             ESTADO: true
                         });
+                        vaciarDatos();
                         alert("CORRECTO");
                     }else{
                         cambiarEstadoInput("escuderia", false);
@@ -125,13 +132,6 @@ function guardarEscuderia() {
         }else
             alert("VALORES INGRESADOS INCORRECTOS, REVISE EL FORMULARIO");
     }
-}
-
-function cambiarEstadoInput(id, estado) { //true -> Correcto valor  false -> Incorrecto valor
-    if(estado)
-        $(`#${id}`).removeClass('danger').addClass('primary');
-    else
-        $(`#${id}`).removeClass('primary').addClass('danger');
 }
 
 function deletePuntoVenta(esc) {

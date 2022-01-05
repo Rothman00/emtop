@@ -1,3 +1,5 @@
+let files = [];
+
 function decDos(n) {
     if(n=="")return 0;
     if(typeof n === 'undefined') return 0;
@@ -20,3 +22,16 @@ function removerSelectedItem(hasta, id) {
     opt.text = text;
     $select.appendChild(opt);
  }
+
+ function cambiarEstadoInput(id, estado) { //true -> Correcto valor  false -> Incorrecto valor
+   if(estado)
+       $(`#${id}`).removeClass('danger').addClass('primary');
+   else
+       $(`#${id}`).removeClass('primary').addClass('danger');
+}
+
+if($('#fileRead').length > 0){
+    document.getElementById("fileRead").addEventListener("change", function(e) {
+        files = e.target.files;
+    });
+}
