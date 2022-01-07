@@ -54,7 +54,7 @@
                             <label class="col-sm-3 control-label text-right">IMAGEN <span class="obligatorio">*</span></label>
                             <center>
                                 <div class="col-sm-8 input-group fileupload-v1">
-                                    <input type="file" name="fileRead" id="fileRead" class="fileupload-v1-file hidden" accept=".png, .gif, .jpg, .jpeg" data-bind="event: { change: $root.Browse }"/>
+                                    <input type="file" name="fileRead" id="fileRead" class="fileupload-v1-file hidden" accept="image/*" data-bind="event: { change: $root.Browse }"/>
                                     <input type="text" id="imagenClass" class="form-control primary fileupload-v1-path" placeholder="Seleccione una imagen" disabled>
                                     <span class="input-group-btn">
                                         <button class="btn fileupload-v1-btn" type="button"><i class="icons icon-picturer"></i> Escoger</button>

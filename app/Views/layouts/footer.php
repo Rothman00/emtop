@@ -43,6 +43,7 @@
      <script src="<?php echo base_Url()?>/asset/js/my/createTable.js"></script>
      <script src="<?php echo base_Url()?>/asset/js/my/puntoventa.js"></script>
      <script src="<?php echo base_Url()?>/asset/js/my/productos.js"></script>
+     <script src="<?php echo base_Url()?>/asset/js/my/capacitacion.js"></script>
 
 
     <script type="text/javascript">
@@ -102,6 +103,29 @@
                     }, 250);
                 });
             }
+
+            //CAPACITACIÓN
+            let datosCapacitacion=[];
+            if ($('#capacitacionDatos').length > 0) {
+                var starCountRef = firebase.database().ref('tbl_tutoriales');
+                starCountRef.on('value', (snapshot) => {
+                    if(snapshot.exists()){
+                        datosCapacitacion=[];
+                        const data = snapshot.val();
+                        for (const key in data) {
+                            const element = data[key];
+                            for (const k in element) {
+                                const e = element[k];
+                                e.CODIGO = key;
+                                datosCapacitacion.push(e);
+                            }
+                        }
+                    }
+                    setTimeout(function(){
+                        $('#capacitacionDatos').html(generarCapacitacion(datosCapacitacion));
+                    }, 250);
+                });
+            }       
             
             //ELEMENTOS ADICIONALES
             $('.dateAnimate').bootstrapMaterialDatePicker({ weekStart : 0, time: false, animation:true, minDate:new Date()});

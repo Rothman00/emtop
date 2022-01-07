@@ -47,7 +47,7 @@
                         <div class="row form-group">
                             <label class="col-sm-3 control-label text-right">CIUDAD <span class="obligatorio">*</span></label>
                             <div class="col-sm-9">
-                                <select class="select2-A form-control primary" id="ciudad" placeholders="Seleccionar ciudad"></select>
+                                <select class=" form-control primary" id="ciudad" placeholders="Seleccionar ciudad"></select>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -59,7 +59,7 @@
                         <div class="row form-group">
                             <label class="col-sm-3 control-label text-right">ADMINISTRADOR <span class="obligatorio">*</span></label>
                             <div class="col-sm-9">
-                                <select class="select2-A form-control primary" id="admin" placeholders="Seleccionar administrador"></select>
+                                <select class=" form-control primary" id="admin" placeholders="Seleccionar administrador"></select>
                             </div>
                         </div>
                         <div class="row form-group">

@@ -226,5 +226,6 @@ function productoInsert(cod, pro, fil, des, pun, ded, has) {
 }
 
 function deleteFichaTecnica(id) {
-    firebase.database().ref(`tbl_fichatecnica/${id}/ESTADO`).set(false);
+    if(confirm('¿Seguro de eliminar ficha técnica?'))
+        firebase.database().ref(`tbl_fichatecnica/${id}/ESTADO`).set(false);
 }

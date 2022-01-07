@@ -21,3 +21,13 @@ dbConfig.on('value', (snapshot) => {
         }
     }
 });
+
+//FICHA TÉCNICA PARA DIFERENTES ID'S
+let datosFichaTecnica = [];
+if ($('#capacitacionDatos').length > 0) {
+    var dbFichaTecnica = firebase.database().ref('tbl_fichatecnica');
+    dbFichaTecnica.on('value', (snapshot) => {
+        if(snapshot.exists())
+            datosFichaTecnica = snapshot.val();
+    });
+}

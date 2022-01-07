@@ -35,3 +35,9 @@ if($('#fileRead').length > 0){
         files = e.target.files;
     });
 }
+
+function nombreFile(fil) {
+    let data1 = fil.split('%2F');
+    let data2 = data1[2].split('?alt');
+    return data2[0];
+}

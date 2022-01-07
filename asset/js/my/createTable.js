@@ -82,3 +82,103 @@ function generarFichaTecnica(data) {
     tabla += '</tbody></table>';
     return tabla;
 }
+
+function generarCapacitacion(data) {
+    let content = '';
+    let codigo = '';
+    let ind = true;
+    data.forEach(element => {
+        if(codigo != element.CODIGO){
+            codigo = element.CODIGO;
+            if(!ind){
+                content += '</div>';
+                ind = true;
+            }
+            content += `
+                <br>
+                <center><h3>${codigo}</h3></center>
+                <br>
+            `;
+        }
+        if (ind){
+            ind = false;
+            content += `
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="panel box-v1">
+                            <div class="panel-heading bg-white border-none">
+            `;
+        }else{
+            ind = true;
+            content += `
+                    <div class="col-md-6">
+                        <div class="panel box-v1">
+                            <div class="panel-heading bg-white border-none">
+            `;
+        }
+        let nombre = nombreFile(element.LINK);
+        let format = nombre.split('.');
+        switch (format[1]) {
+            case 'wmv':
+            case 'asf':
+            case 'mov':
+            case 'flv':
+            case 'rm':
+            case 'rmvb':
+            case 'mp4':
+            case 'mkv':
+            case 'mks':
+            case '3gpp':
+                content += `
+                                <video controls name="media"><source src="${element.LINK}" type="video/${format[1]}"></video>
+                            </div>
+                            <div class="panel-body text-center">
+                                <strong>${element.NOMBRE}</strong>
+                                <p>${element.DESCRIPCION}</p>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <button type="button" class="btn btn-3d btn-warning" data-toggle="modal" data-target="#capacitacionModel" onclick="cargarCapacitacion('${element.CODIGO??''}','${element.NOMBRE??''}','${element.DESCRIPCION??''}','${element.LINK??''}');">
+                                            <i class="icons icon-settings"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <button type="button" class="btn btn-3d btn-danger" onclick="deleteCapacitacion('${element.CODIGO}', '${element.NOMBRE}', '${element.LINK}');">
+                                            <i class="icons icon-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                break;
+            default:
+                content += `
+                                <img src="${element.LINK}" class="img-responsive">
+                            </div>
+                            <div class="panel-body text-center">
+                                <strong>${element.NOMBRE}</strong>
+                                <p>${element.DESCRIPCION}</p>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <button type="button" class="btn btn-3d btn-warning" data-toggle="modal" data-target="#capacitacionModel" onclick="cargarCapacitacion('${element.CODIGO??''}','${element.NOMBRE??''}','${element.DESCRIPCION??''}','${element.LINK??''}');">
+                                            <i class="icons icon-settings"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <button type="button" class="btn btn-3d btn-danger" onclick="deleteCapacitacion('${element.CODIGO}', '${element.NOMBRE}', '${element.LINK}');">
+                                            <i class="icons icon-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                break;
+        }
+        if(ind)
+            content += "</div>";
+    });
+    return content;
+}
