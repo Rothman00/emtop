@@ -26,6 +26,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>/asset/css/plugins/datatables.bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="<?php echo base_Url()?>/asset/css/plugins/bootstrap-material-datetimepicker.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>/asset/css/plugins/spinkit.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>/asset/css/plugins/summernote.css"/>
+
     <!-- DataTable -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css"/>
     <!-- HUSO HORARIO -->

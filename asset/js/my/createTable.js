@@ -14,7 +14,7 @@ function generarTablaPuntoVenta(data) {
     data.forEach(d => {
         if(d["ESTADO"]){
             let usu = datosUsuarios[d["ADMINISTRADOR"]];
-            tabla += `<tr>
+            tabla += `<tr class="text-center">
                         <td style="color:#000000;">${d["ESCUDERIA"]??''}</td>
                         <td style="color:#000000;">${d["CIUDAD"]??''}</td>
                         <td style="color:#000000;">${d["DIRECCION"]??''}</td>
@@ -50,7 +50,7 @@ function generarFichaTecnica(data) {
                     <tbody>`;
     data.forEach(d => {
         if(d["ESTADO"]){
-            tabla += `<tr>
+            tabla += `<tr class="text-center">
                         <td style="color:#000000;">${d["CODIGO"]??''}</td>
                         <td style="color:#000000;">${d["NOMBRE"]??''}</td>
                         <td style="color:#000000;">
@@ -181,4 +181,43 @@ function generarCapacitacion(data) {
             content += "</div>";
     });
     return content;
+}
+
+function generarForoTemas(data) {
+    let tabla = `
+        <table id="datatables-generic0" class="table table-striped table-bordered" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Autor</th>
+                    <th>Temas</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>`;
+    data.forEach(d => {
+        let usu = datosUsuarios[d["USUARIO"]];
+        let img = base_url+"/asset/img/avatar.jpg";
+        if(usu["FOTO"]!='') img = usu["FOTO"];
+        tabla+=`
+                <tr class="text-center">
+                    <td style="color:#000000;">
+                        <strong>${usu["NOMBRES"]} ${usu["APELLIDOS"]}</strong>
+                        <br>
+                        <img src="${img}" class="img-circle avatar">
+                        <p>${d["FECHA"]}</p>
+                    </td>
+                    <td style="color:#000000;">${d["TEMA"]}</td>
+                    <td style="color:#000000;">
+                        <button type="button" class="btn btn-circle btn-mn btn-warning" data-toggle="modal" data-target="#discursoModel" onclick="mostrarDiscursoNuevo('${d["TEMA"]}');">
+                            <i class="icons icon-speech"></i>
+                        </button>
+                        <button type="button" class="btn btn-circle btn-mn btn-danger" onclick="deleteTemaForo('${d["TEMA"]}');">
+                            <i class="icons icon-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                `;
+    });
+    tabla += '</tbody></table>';
+    return tabla;
 }

@@ -25,6 +25,7 @@
     <script src="<?php echo base_Url()?>/asset/js/plugins/dropzone.js"></script>
     <script src="<?php echo base_Url()?>/asset/js/plugins/shim.min.js"></script>
     <script src="<?php echo base_Url()?>/asset/js/plugins/jszip.js"></script>
+    <script src="<?php echo base_Url()?>/asset/js/plugins/summernote.min.js"></script>
 
     <!-- DataTable -->
     <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
@@ -44,9 +45,11 @@
      <script src="<?php echo base_Url()?>/asset/js/my/puntoventa.js"></script>
      <script src="<?php echo base_Url()?>/asset/js/my/productos.js"></script>
      <script src="<?php echo base_Url()?>/asset/js/my/capacitacion.js"></script>
+     <script src="<?php echo base_Url()?>/asset/js/my/foro.js"></script>
 
 
     <script type="text/javascript">
+        window.root = <?php echo json_encode($usuario->ID);?>;
         window.base_url = <?php echo json_encode(base_url());?>;
         $(document).ready(function(){
             //CREACIÓN DE TABLAS
@@ -126,9 +129,10 @@
                     }, 250);
                 });
             }       
-            
+
             //ELEMENTOS ADICIONALES
-            $('.dateAnimate').bootstrapMaterialDatePicker({ weekStart : 0, time: false, animation:true, minDate:new Date()});
+            $('.dateAnimate').bootstrapMaterialDatePicker({ weekStart : 0, time: false, animation:true, minDate:new Date() });
+            $('.summernote').summernote({ height: 75 });
         });
 
       (function(jQuery){

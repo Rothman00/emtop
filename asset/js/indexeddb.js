@@ -31,3 +31,30 @@ if ($('#capacitacionDatos').length > 0) {
             datosFichaTecnica = snapshot.val();
     });
 }
+
+//FORO PARA DIFERENTES ID'S
+let datosForo={};
+if ($('#foroDatos').length > 0) {
+    var starCountRef = firebase.database().ref('tbl_foro');
+    starCountRef.on('value', (snapshot) => {
+        let datosForoCreacion = [];
+        if(snapshot.exists()){
+            const data = snapshot.val();
+            datosForo = data;
+            for (const key in data) {
+                const element = data[key];
+                datosForoCreacion.push(element);
+            }
+        }
+        setTimeout(function(){
+            $('#foroDatos').html(generarForoTemas(datosForoCreacion));
+            $('#datatables-generic0').DataTable({
+                "scrollX": true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+        }, 500);
+    });
+} 

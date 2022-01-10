@@ -36,38 +36,43 @@ function vaciarCajasCapacitacion() {
 }
 
 function guardarCapacitacion() {
-    let cod = $('#fichaTecnica').val();
-    let nom = $('#nombre').val();
-    let des = $('#descripcion').val();
-    let fil = $('#imagenClass').val();
-    let est = true;
-    if(cod == ""){
-        est = false;
-        cambiarEstadoInput("fichaTecnica", false);
-    }else
-        cambiarEstadoInput("fichaTecnica", true);
-    if(nom == ""){
-        est = false;
-        cambiarEstadoInput("nombre", false);
-    }else
-        cambiarEstadoInput("nombre", true);
-    if(des == ""){
-        est = false;
-        cambiarEstadoInput("nombre", false);
-    }else
-        cambiarEstadoInput("nombre", true);
-    if(fil == ''){
-        if (files.length != 0)
-            cambiarEstadoInput("imagenClass", true);   
-        else {
-            cambiarEstadoInput("imagenClass", false);
-            estado = false;
+    let texto = '¿Seguro de crear capacitación?';
+    if(!optCapacitacion)
+        texto = '¿Seguro de editar capacitación?';
+    if(confirm(texto)){
+        let cod = $('#fichaTecnica').val();
+        let nom = $('#nombre').val();
+        let des = $('#descripcion').val();
+        let fil = $('#imagenClass').val();
+        let est = true;
+        if(cod == ""){
+            est = false;
+            cambiarEstadoInput("fichaTecnica", false);
+        }else
+            cambiarEstadoInput("fichaTecnica", true);
+        if(nom == ""){
+            est = false;
+            cambiarEstadoInput("nombre", false);
+        }else
+            cambiarEstadoInput("nombre", true);
+        if(des == ""){
+            est = false;
+            cambiarEstadoInput("nombre", false);
+        }else
+            cambiarEstadoInput("nombre", true);
+        if(fil == ''){
+            if (files.length != 0)
+                cambiarEstadoInput("imagenClass", true);   
+            else {
+                cambiarEstadoInput("imagenClass", false);
+                estado = false;
+            }
         }
+        if(est)
+            updateFileCapacitacion(cod, nom, des, fil);
+        else
+            alert("VALORES INGRESADOS INCORRECTOS, REVISE EL FORMULARIO");
     }
-    if(est)
-        updateFileCapacitacion(cod, nom, des, fil);
-    else
-        alert("VALORES INGRESADOS INCORRECTOS, REVISE EL FORMULARIO");
 }
 
 function updateFileCapacitacion(cod, nom, des, fil) {

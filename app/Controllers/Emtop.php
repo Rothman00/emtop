@@ -36,7 +36,7 @@ class Emtop extends BaseController
                 "rutas"=>$this->session->get('rutas'),
                 "roles"=>$this->session->get('roles')
             ];
-            return view('layouts/header', $asideD).view('layouts/aside', $asideD).view('pages/home').view('layouts/footer');
+            return view('layouts/header', $asideD).view('layouts/aside', $asideD).view('pages/home').view('layouts/footer', $asideD);
         }
         $datos=array();
         if(isset($_POST['user']) && isset($_POST['pass'])){
@@ -60,7 +60,7 @@ class Emtop extends BaseController
                 "rutas" => $this->session->get('rutas'),
                 "roles" => $this->session->get('roles')
             ];
-            return view('layouts/header', $asideD).view('layouts/aside', $asideD).view('pages/home').view('layouts/footer');
+            return view('layouts/header', $asideD).view('layouts/aside', $asideD).view('pages/home').view('layouts/footer', $asideD);
         }else{
             if(isset($resp->msj)){
                 echo '<script language="javascript">alert("'.$resp->msj.'");</script>';
@@ -80,7 +80,7 @@ class Emtop extends BaseController
                 "rutas"=>$this->session->get('rutas'),
                 "roles"=>$this->session->get('roles')
             ];
-            return view('layouts/header', $asideD).view('layouts/aside', $asideD).view('pages/puntoventa').view('layouts/footer');
+            return view('layouts/header', $asideD).view('layouts/aside', $asideD).view('pages/puntoventa').view('layouts/footer', $asideD);
         }else{
             return view('login/login');
         }
@@ -94,7 +94,7 @@ class Emtop extends BaseController
                 "rutas"=>$this->session->get('rutas'),
                 "roles"=>$this->session->get('roles')
             ];
-            return view('layouts/header', $asideD).view('layouts/aside', $asideD).view('pages/productos').view('layouts/footer');
+            return view('layouts/header', $asideD).view('layouts/aside', $asideD).view('pages/productos').view('layouts/footer', $asideD);
         }else{
             return view('login/login');
         }
@@ -108,7 +108,21 @@ class Emtop extends BaseController
                 "rutas"=>$this->session->get('rutas'),
                 "roles"=>$this->session->get('roles')
             ];
-            return view('layouts/header', $asideD).view('layouts/aside', $asideD).view('pages/capacitacion').view('layouts/footer');
+            return view('layouts/header', $asideD).view('layouts/aside', $asideD).view('pages/capacitacion').view('layouts/footer', $asideD);
+        }else{
+            return view('login/login');
+        }
+    }
+
+    public function foroMensajes()
+    {
+        if($this->session->has('usuario')){
+            $asideD = [
+                "usuario"=>$this->session->get('usuario'),
+                "rutas"=>$this->session->get('rutas'),
+                "roles"=>$this->session->get('roles')
+            ];
+            return view('layouts/header', $asideD).view('layouts/aside', $asideD).view('pages/foroMensajes').view('layouts/footer', $asideD);
         }else{
             return view('login/login');
         }
