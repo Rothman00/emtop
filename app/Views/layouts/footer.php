@@ -46,6 +46,7 @@
      <script src="<?php echo base_Url()?>/asset/js/my/productos.js"></script>
      <script src="<?php echo base_Url()?>/asset/js/my/capacitacion.js"></script>
      <script src="<?php echo base_Url()?>/asset/js/my/foro.js"></script>
+     <script src="<?php echo base_Url()?>/asset/js/my/premios.js"></script>
 
 
     <script type="text/javascript">
@@ -80,7 +81,7 @@
                     }, 250);
                 });
             }
-            //FICHA TÉCNICA
+            //FICHA TÉCNICA NO COMENTAR
             let datosFichatec=[];
             if ($('#tableFichaTecnica').length > 0) {
                 var starCountRef = firebase.database().ref('tbl_fichatecnica');
@@ -107,7 +108,7 @@
                 });
             }
 
-            //CAPACITACIÓN
+            //CAPACITACIÓN NO COMENTAR
             let datosCapacitacion=[];
             if ($('#capacitacionDatos').length > 0) {
                 var starCountRef = firebase.database().ref('tbl_tutoriales');

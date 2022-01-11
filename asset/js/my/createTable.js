@@ -221,3 +221,127 @@ function generarForoTemas(data) {
     tabla += '</tbody></table>';
     return tabla;
 }
+
+function generarCatalogoPremios(data) {
+    let content = '';
+    let ind = true;
+    data.forEach(element => {
+        if(element.ESTADO){
+            if (ind){
+                ind = false;
+                content += `
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="panel box-v1">
+                                <div class="panel-heading bg-white border-none">
+                `;
+            }else{
+                ind = true;
+                content += `
+                        <div class="col-md-6">
+                            <div class="panel box-v1">
+                                <div class="panel-heading bg-white border-none">
+                `;
+            }
+            content += `<img src="${element.LINK}" class="img-responsive">
+                    </div>
+                    <div class="panel-body text-center">
+                        <strong>${element.NOMBRE}</strong>
+                        <p>${element.DESCRIPCION}</p>
+                        <strong>PUNTOS: ${element.PUNTOS}</strong>
+                        <p>${element.FECHADESDE}/${element.FECHAHASTA}</p>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button type="button" class="btn btn-3d btn-warning" data-toggle="modal" data-target="#premioModel" onclick="mostrarPremio('${element.CODIGO??''}','${element.NOMBRE??''}','${element.DESCRIPCION??''}','${element.LINK??''}','${element.PUNTOS??''}','${element.FECHADESDE??''}','${element.FECHAHASTA??''}');">
+                                    <i class="icons icon-settings"></i>
+                                </button>
+                            </div>
+                            <div class="col-sm-6">
+                                <button type="button" class="btn btn-3d btn-danger" onclick="deletePremio('${element.CODIGO}');">
+                                    <i class="icons icon-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+            if(ind)
+                content += "</div>";
+        }
+    });
+    return content;
+}
+
+function generarCanjes(data) {
+    let tabla = `
+        <br>
+        <table id="datatables-generic0" class="table table-striped table-bordered" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Escuderia</th>
+                    <th>Administrador</th>
+                    <th>Ciudad</th>
+                    <th>Dirección</th>
+                    <th>Puntos Total</th>
+                    <th>Premio</th>
+                    <th>Puntos</th>
+                    <th>Fecha Solicitud</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>`;
+    for (const key in data) {
+        const d = data[key];
+        if(d["CANJEAR"] != undefined){
+            for (const k in d["CANJEAR"]) {
+                const e = d["CANJEAR"][k];
+                let esc = datosPuntoVenta[e["ESCUDERIA"]];
+                let text = 'PENDIENTE';
+                if(e["ESTADO"] == 0)
+                    text = 'APROBADO';
+                if(e["ESTADO"] == 1){
+                    if(!comprobarFechas(e["FECHASOLICITUD"], d["FECHAHASTA"])){
+                        text = 'FUERA DE TIEMPO';
+                        fueraTiempoEscuderia(d["CODIGO"], k, e["ESCUDERIA"], d["PUNTOS"]);
+                    }
+                }
+                if(e["ESTADO"] == 2)
+                    text = "NEGADO";
+                if(e["ESTADO"] == 3)
+                    text = "FUERA DE TIEMPO";
+                tabla+=`
+                        <tr class="text-center">
+                            <td style="color:#000000;">${e["ESCUDERIA"]}</td>
+                            <td style="color:#000000;">${esc["ADMINISTRADOR"]}</td>
+                            <td style="color:#000000;">${esc["CIUDAD"]}</td>
+                            <td style="color:#000000;">${esc["DIRECCION"]}</td>
+                            <td style="color:#000000;">${e["PUNTOSTOTAL"]}</td>
+                            <td style="color:#000000;">${d["CODIGO"]}-${d["NOMBRE"]}</td>
+                            <td style="color:#000000;">${d["PUNTOS"]}</td>
+                            <td style="color:#000000;">${e["FECHASOLICITUD"]}</td>
+                            <td style="color:#000000;">${text}</td>`;
+                if(text == 'PENDIENTE'){
+                    tabla += `<td style="color:#000000;">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <button type="button" class="btn btn-circle btn-mn btn-success" onclick="premiarEscuderia('${d["CODIGO"]}', '${k}');">
+                                            <i class="icons icon-like"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <button type="button" class="btn btn-circle btn-mn btn-danger" onclick="negarEscuderia('${d["CODIGO"]}', '${k}', '${e["ESCUDERIA"]}', '${d["PUNTOS"]}');">
+                                            <i class="icons icon-dislike"></i>
+                                        </button>
+                                    </div>
+                                </div>  
+                            </td>`;
+                }else
+                    tabla += '<td></td>';
+                tabla += `</tr>`;
+            }
+        }
+    }
+    tabla += '</tbody></table>';
+    return tabla;
+}
