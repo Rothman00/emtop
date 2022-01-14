@@ -144,7 +144,7 @@ function mostrarRolModal(esc, usu) {
         let roles = datosRolUsuario[usu];
         for (const key in roles) {
             const r = roles[key];
-            if(r )//&& key != "SUPERADMIN")
+            if(r && key != "SUPERADMIN")
                 $(`#rolUsuarioCon${key}`).prop('checked', true).prop('disabled', false).trigger('change');
         }
     }
@@ -187,7 +187,7 @@ function casillasModalRol(idRol, idRuta, est) {
                     <strong>Roles</strong>`;
     for (const key in datosRol) {
         const r = datosRol[key];
-        if(r ){//&& key!="SUPERADMIN"){
+        if(r && key!="SUPERADMIN"){
             rolTex += `<div class="form-group form-animate-checkbox">
                             <input type="checkbox" class="checkbox ${idRol}" id="${idRol}${key}" onchange="onchangeRutasForRol('${idRuta}', '${idRol}', '${key}', '${est}')">
                             <label> ${key}</label>

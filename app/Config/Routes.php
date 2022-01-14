@@ -47,6 +47,7 @@ $routes->get('/foro',           'Emtop::foroMensajes');
 $routes->get('/premios',        'Emtop::premios');
 $routes->get('/configuraciones','Emtop::configuracion');
 $routes->get('/reportes',       'Emtop::reportes');
+$routes->get('/notificaciones', 'Emtop::whatsapp');
 
 /*
  * --------------------------------------------------------------------
