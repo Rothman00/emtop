@@ -46,6 +46,7 @@ $routes->get('/capacitacion',   'Emtop::capaciaciones');
 $routes->get('/foro',           'Emtop::foroMensajes');
 $routes->get('/premios',        'Emtop::premios');
 $routes->get('/configuraciones','Emtop::configuracion');
+$routes->get('/reportes',       'Emtop::reportes');
 
 /*
  * --------------------------------------------------------------------

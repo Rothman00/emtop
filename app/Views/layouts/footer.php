@@ -48,6 +48,7 @@
      <script src="<?php echo base_Url()?>/asset/js/my/foro.js"></script>
      <script src="<?php echo base_Url()?>/asset/js/my/premios.js"></script>
      <script src="<?php echo base_Url()?>/asset/js/my/config.js"></script>
+     <script src="<?php echo base_Url()?>/asset/js/my/reportes.js"></script>
 
 
     <script type="text/javascript">
