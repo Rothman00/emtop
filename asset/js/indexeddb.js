@@ -94,3 +94,35 @@ if ($('#catalogoPremios').length > 0) {
         }, 500);
     });
 }
+
+//RUTAS
+let datosRuta = {};
+var dbRutas = firebase.database().ref('tbl_ruta');
+dbRutas.on('value', (snapshot) => {
+    if(snapshot.exists())
+        datosRuta=snapshot.val();
+});
+
+//ROLRUTAS
+let datosRolRutas = {};
+var dbRolRutas = firebase.database().ref('tbl_rolruta');
+dbRolRutas.on('value', (snapshot) => {
+    if(snapshot.exists())
+        datosRolRutas=snapshot.val();
+});
+
+//ROL
+let datosRol = {};
+var dbRol = firebase.database().ref('tbl_rol');
+dbRol.on('value', (snapshot) => {
+    if(snapshot.exists())
+        datosRol=snapshot.val();
+});
+
+//ROLUSAURIO
+let datosRolUsuario = {};
+var dbRolUsuario = firebase.database().ref('tbl_rolusuario');
+dbRolUsuario.on('value', (snapshot) => {
+    if(snapshot.exists())
+        datosRolUsuario=snapshot.val();
+});

@@ -36,6 +36,12 @@ if($('#fileRead').length > 0){
     });
 }
 
+if($('#fileRead1').length > 0){
+    document.getElementById("fileRead1").addEventListener("change", function(e) {
+        files = e.target.files;
+    });
+}
+
 function nombreFile(fil) {
     let data1 = fil.split('%2F');
     let data2 = data1[2].split('?alt');

@@ -345,3 +345,256 @@ function generarCanjes(data) {
     tabla += '</tbody></table>';
     return tabla;
 }
+
+function generarPuntosConfig(data) {
+    let tabla = `
+        <br>
+        <table id="datatables-generic0" class="table table-striped table-bordered" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Porcentaje</th>
+                    <th>Factor</th>
+                    <th>Fecha Desde</th>
+                    <th>Fecha Hasta</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>`;
+    data.forEach(d => {
+        if(d["ESTADO"]){
+            tabla+=`
+                    <tr class="text-center">
+                        <td style="color:#000000;">${d["PORCENTAJE"]}</td>
+                        <td style="color:#000000;">${d["FACTOR"]}</td>
+                        <td style="color:#000000;">${d["FECHADESDE"]}</td>
+                        <td style="color:#000000;">${d["FECHAHASTA"]}</td>
+                        <td style="color:#000000;">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <button type="button" class="btn btn-circle btn-mn btn-warning" data-toggle="modal" data-target="#puntosConfigModel" onclick="mostrarPuntosModelConfig('${d["PORCENTAJE"]}', '${d["FACTOR"]}', '${d["FECHADESDE"]}', '${d["FECHAHASTA"]}');">
+                                        <i class="icons icon-settings"></i>
+                                    </button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <button type="button" class="btn btn-circle btn-mn btn-danger" onclick="deletePremio('${d["FECHADESDE"]}');">
+                                        <i class="icons icon-trash"></i>
+                                    </button>
+                                </div>
+                            </div>  
+                        </td>
+                    </tr>`;
+        }
+    });
+    tabla += '</tbody></table>';
+    return tabla;
+}
+
+function generarUsuarioConfigData(data) {
+    let tabla = `
+        <br>
+        <table id="datatables-generic1" class="table table-striped table-bordered" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>DNI</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Foto</th>
+                    <th>Escuderia</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>`;
+    data.forEach(d => {
+        if(d["ESTADO"]){
+            let esc = d["ESCUDERIA"];
+            if(d["ESCUDERIA"] == undefined || d["ESCUDERIA"] == null)
+                esc = "CLIENTE";
+            else if(d["ESCUDERIA"] == '')
+                esc = "ADMINISTRADOR"
+            tabla+=`
+                    <tr class="text-center">
+                        <td style="color:#000000;">${d["APELLIDOS"]} ${d["NOMBRES"]}</td>
+                        <td style="color:#000000;">${d["DNI"]}</td>
+                        <td style="color:#000000;">${d["EMAIL"]}</td>
+                        <td style="color:#000000;">${d["TELEFONO"]}</td>
+                        <td style="color:#000000;">
+                            <button type="button" class="btn btn-circle btn-mn btn-success" data-toggle="modal" data-target="#mostrarImagen" onclick="cargarImagen('${d["FOTO"]==''?base_url+"/asset/img/avatar.jpg":d["FOTO"]}');">
+                                <i class="icons icon-picture"></i>
+                            </button>
+                        </td>
+                        <td style="color:#000000;">${esc}</td>
+                        <td style="color:#000000;">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <button type="button" class="btn btn-circle btn-mn btn-warning" data-toggle="modal" data-target="#otorgarRolUsuario" onclick="mostrarRolModal('${esc}','${d["USUARIO"]}');">
+                                        <i class="icons icon-diamond"></i>
+                                    </button>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button type="button" class="btn btn-circle btn-mn btn-warning" data-toggle="modal" data-target="#usuariosConfModel" onclick="mostrarUsuarioConf('${d["DNI"]}','${d["NOMBRES"]}','${d["APELLIDOS"]}','${d["EMAIL"]}','${d["TELEFONO"]}','${d["FOTO"]}','${d["ESCUDERIA"]??''}','${d["USUARIO"]}','${d["PASSWORD"]}');">
+                                        <i class="icons icon-settings"></i>
+                                    </button>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button type="button" class="btn btn-circle btn-mn btn-danger" onclick="deletePremio('${d["FECHADESDE"]}');">
+                                        <i class="icons icon-trash"></i>
+                                    </button>
+                                </div>
+                            </div>  
+                        </td>
+                    </tr>`;
+        }
+    });
+    tabla += '</tbody></table>';
+    return tabla;
+}
+
+function generarTablaCiudad(data) {
+    let tabla = `
+        <br>
+        <table id="datatables-generic2" class="table table-striped table-bordered" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Ciudad</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>`;
+    for (const key in data) {
+        const d = data[key];
+        if(d){
+            tabla+=`
+                    <tr class="text-center">
+                        <td style="color:#000000;">${key}</td>
+                        <td style="color:#000000;">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <button type="button" class="btn btn-circle btn-mn btn-warning" data-toggle="modal" data-target="#ciudadModalN" onclick="mostrarCiudad('${key}');">
+                                        <i class="icons icon-settings"></i>
+                                    </button>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button type="button" class="btn btn-circle btn-mn btn-danger" onclick="deleteCiudadN('${key}');">
+                                        <i class="icons icon-trash"></i>
+                                    </button>
+                                </div>
+                            </div>  
+                        </td>
+                    </tr>`;
+        }
+    }
+    tabla += '</tbody></table>';
+    return tabla;
+}
+
+function generarCaroulBanner(data) {
+    let indicator1 = '', indicator2 = '', contenido1 = '', contenido2 = '', con1 = 0, con2 = 0;
+    var hoy = new Date().toISOString().slice(0, 10);
+    data.forEach(d => {
+        if(d["ESTADO"]){
+            if(comprobarFechas(d["FECHADESDE"], hoy) && comprobarFechas(hoy, d["FECHAHASTA"])){
+                if(indicator1 == ''){
+                    indicator1 += `<li data-target="#carousel-example3" data-slide-to="${con1++}" class="active"></li>`;
+                    contenido1 += `<div class="item active">
+                                        <img class="img-responsive" src="${d["LINK"]}" alt="First slide" >
+                                        <div class="carousel-caption">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <button class="btn btn-round btn-warning" data-animation="animated zoomInRight" data-toggle="modal" data-target="#bannerModalN" onclick="mostrarBanner('${d["ID"]}','${d["LINK"]}','${d["FECHADESDE"]}','${d["FECHAHASTA"]}')"><i class="icons icon-settings"></i></button>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <button class="btn btn-round btn-danger" data-animation="animated zoomInUp"><i class="icons icon-trash" onclick="deleteBanner('${d["ID"]}')"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`;
+                }else{
+                    indicator1 += `<li data-target="#carousel-example3" data-slide-to="${con1++}"></li>`;
+                    contenido1 += `<div class="item">
+                                        <img class="img-responsive" src="${d["LINK"]}" alt="First slide" >
+                                        <div class="carousel-caption">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <button class="btn btn-round btn-warning" data-animation="animated zoomInRight" data-toggle="modal" data-target="#bannerModalN" onclick="mostrarBanner('${d["ID"]}','${d["LINK"]}','${d["FECHADESDE"]}','${d["FECHAHASTA"]}')"><i class="icons icon-settings"></i></button>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <button class="btn btn-round btn-danger" data-animation="animated zoomInUp"><i class="icons icon-trash" onclick="deleteBanner('${d["ID"]}')"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`;
+                }
+            }else{
+                firebase.database().ref(`tbl_banner/${d["ID"]}/ESTADO`).set(false);
+                if(indicator2 == ''){
+                    indicator2 += `<li data-target="#carousel-example4" data-slide-to="${con2++}" class="active"></li>`;
+                    contenido2 += `<div class="item active">
+                                        <img class="img-responsive" src="${d["LINK"]}" alt="First slide" >
+                                        <div class="carousel-caption">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <button class="btn btn-round btn-warning" data-animation="animated zoomInRight" data-toggle="modal" data-target="#bannerModalN" onclick="mostrarBanner('${d["ID"]}','${d["LINK"]}','${d["FECHADESDE"]}','${d["FECHAHASTA"]}')"><i class="icons icon-settings"></i></button>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <button class="btn btn-round btn-danger" data-animation="animated zoomInUp"><i class="icons icon-trash" onclick="deleteBanner('${d["ID"]}')"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`;
+                }else{
+                    indicator2 += `<li data-target="#carousel-example4" data-slide-to="${con2++}"></li>`;
+                    contenido2 += `<div class="item">
+                                        <img class="img-responsive" src="${d["LINK"]}" alt="First slide" >
+                                        <div class="carousel-caption">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <button class="btn btn-round btn-warning" data-animation="animated zoomInRight" data-toggle="modal" data-target="#bannerModalN" onclick="mostrarBanner('${d["ID"]}','${d["LINK"]}','${d["FECHADESDE"]}','${d["FECHAHASTA"]}')"><i class="icons icon-settings"></i></button>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <button class="btn btn-round btn-danger" data-animation="animated zoomInUp"><i class="icons icon-trash" onclick="deleteBanner('${d["ID"]}')"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`;
+                }
+            }
+        }else{
+            if(indicator2 == ''){
+                indicator2 += `<li data-target="#carousel-example4" data-slide-to="${con2++}" class="active"></li>`;
+                contenido2 += `<div class="item active">
+                                    <img class="img-responsive" src="${d["LINK"]}" alt="First slide" >
+                                    <div class="carousel-caption">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <button class="btn btn-round btn-warning" data-animation="animated zoomInRight" data-toggle="modal" data-target="#bannerModalN" onclick="mostrarBanner('${d["ID"]}','${d["LINK"]}','${d["FECHADESDE"]}','${d["FECHAHASTA"]}')"><i class="icons icon-settings"></i></button>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <button class="btn btn-round btn-danger" data-animation="animated zoomInUp"><i class="icons icon-trash" onclick="deleteBanner('${d["ID"]}')"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+            }else{
+                indicator2 += `<li data-target="#carousel-example4" data-slide-to="${con2++}"></li>`;
+                contenido2 += `<div class="item">
+                                    <img class="img-responsive" src="${d["LINK"]}" alt="First slide" >
+                                    <div class="carousel-caption">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <button class="btn btn-round btn-warning" data-animation="animated zoomInRight" data-toggle="modal" data-target="#bannerModalN" onclick="mostrarBanner('${d["ID"]}','${d["LINK"]}','${d["FECHADESDE"]}','${d["FECHAHASTA"]}')"><i class="icons icon-settings"></i></button>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <button class="btn btn-round btn-danger" data-animation="animated zoomInUp"><i class="icons icon-trash" onclick="deleteBanner('${d["ID"]}')"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+            }
+        }
+    });
+    $('#indicatorNum1').html(indicator1);
+    $('#indicatorNum2').html(indicator2);
+    $('#contenidoCarouel1').html(contenido1);
+    $('#contenidoCarouel2').html(contenido2);
+}

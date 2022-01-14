@@ -7,10 +7,6 @@
 	<meta name="keyword" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <title>EMTOP</title>
-    <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_Url()?>/asset/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_Url()?>/asset/css/style.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_Url()?>/asset/css/my.css">
     <!-- JS -->
     <script src="<?php echo base_Url()?>/asset/js/configuration.js"></script>
     <!-- PLUGINS -->
@@ -27,6 +23,10 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_Url()?>/asset/css/plugins/bootstrap-material-datetimepicker.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>/asset/css/plugins/spinkit.css"/>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>/asset/css/plugins/summernote.css"/>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="<?php echo base_Url()?>/asset/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_Url()?>/asset/css/style.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_Url()?>/asset/css/my.css">
 
     <!-- DataTable -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css"/>

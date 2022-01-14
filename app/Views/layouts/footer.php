@@ -47,6 +47,7 @@
      <script src="<?php echo base_Url()?>/asset/js/my/capacitacion.js"></script>
      <script src="<?php echo base_Url()?>/asset/js/my/foro.js"></script>
      <script src="<?php echo base_Url()?>/asset/js/my/premios.js"></script>
+     <script src="<?php echo base_Url()?>/asset/js/my/config.js"></script>
 
 
     <script type="text/javascript">
@@ -129,7 +130,103 @@
                         $('#capacitacionDatos').html(generarCapacitacion(datosCapacitacion));
                     }, 250);
                 });
-            }       
+            } 
+            
+            //CAPACITACIÓN NO COMENTAR
+            let datosConfPuntos=[];
+            if ($('#puntosDatos').length > 0) {
+                var starCountRef = firebase.database().ref('tbl_configuracion');
+                starCountRef.on('value', (snapshot) => {
+                    if(snapshot.exists()){
+                        datosConfPuntos=[];
+                        const data = snapshot.val();
+                        for (const key in data) {
+                            const element = data[key];
+                            datosConfPuntos.push(element);
+                        }
+                    }
+                    setTimeout(function(){
+                        $('#puntosDatos').html(generarPuntosConfig(datosConfPuntos));
+                        $('#datatables-generic0').DataTable({
+                            "scrollX": true,
+                            dom: 'Bfrtip',
+                            buttons: [
+                                'copy', 'csv', 'excel', 'pdf', 'print'
+                            ]
+                        });
+                    }, 250);
+                });
+            } 
+
+            //USUARIOS LLENADO
+            if($('#usuariosDatos').length > 0){
+                setTimeout(function(){
+                    let datosUsuarioConfig = [];
+                    for (const key in datosUsuarios) {
+                        if (Object.hasOwnProperty.call(datosUsuarios, key)) {
+                            const element = datosUsuarios[key];
+                            datosUsuarioConfig.push(element);
+                        }
+                    }
+                    $('#usuariosDatos').html(generarUsuarioConfigData(datosUsuarioConfig));
+                    $('#datatables-generic1').DataTable({
+                        "scrollX": true,
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel', 'pdf', 'print'
+                        ]
+                    });
+                }, 1500);
+            }
+
+            //ROL LLENADO
+            if($('#rolesDatos').length > 0){
+                setTimeout(function(){
+                    casillasModalRol("rolRolCon", "rutasRolCon", false);
+                    casillasModalRutas("rutasRolCon");
+                }, 1500);
+            }
+
+            //CIUDAD LLENADO
+            let datosCiudad={};
+            if ($('#ciudadDatosTable').length > 0) {
+                var starCountRef = firebase.database().ref('tbl_ciudad');
+                starCountRef.on('value', (snapshot) => {
+                    if(snapshot.exists()){
+                        datosCiudad=snapshot.val();
+                    }
+                    setTimeout(function(){
+                        $('#ciudadDatosTable').html(generarTablaCiudad(datosCiudad));
+                        $('#datatables-generic2').DataTable({
+                            "scrollX": true,
+                            dom: 'Bfrtip',
+                            buttons: [
+                                'copy', 'csv', 'excel', 'pdf', 'print'
+                            ]
+                        });
+                    }, 250);
+                });
+            }
+
+            //BANNER LLENADO
+            let datosBanner = [];
+            if ($('#bannerIndicator').length > 0) {
+                var starCountRef = firebase.database().ref('tbl_banner');
+                starCountRef.on('value', (snapshot) => {
+                    if(snapshot.exists()){
+                        datosBanner = [];
+                        let data = snapshot.val();
+                        for (const key in data) {
+                            const e = data[key];
+                            e["ID"] = key;
+                            datosBanner.push(e);
+                        }
+                    }
+                    setTimeout(function(){
+                        generarCaroulBanner(datosBanner);
+                    }, 250);
+                });
+            }
 
             //ELEMENTOS ADICIONALES
             $('.dateAnimate').bootstrapMaterialDatePicker({ weekStart : 0, time: false, animation:true, minDate:new Date() });

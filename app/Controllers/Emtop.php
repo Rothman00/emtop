@@ -141,4 +141,18 @@ class Emtop extends BaseController
             return view('login/login');
         }
     }
+
+    public function configuracion()
+    {
+        if($this->session->has('usuario')){
+            $asideD = [
+                "usuario"=>$this->session->get('usuario'),
+                "rutas"=>$this->session->get('rutas'),
+                "roles"=>$this->session->get('roles')
+            ];
+            return view('layouts/header', $asideD).view('layouts/aside', $asideD).view('pages/config').view('layouts/footer', $asideD);
+        }else{
+            return view('login/login');
+        }
+    }
 }
