@@ -241,7 +241,7 @@ function vaciarCajasUsuarioConfig() {
 
 function guardarUsuario() {
     let texto = '¿Seguro de crear usuario?';
-    if(!optProducto)
+    if(!optUsuarioConf)
         texto = '¿Seguro de editar usuario?';
     if(confirm(texto)){
         let dni = $('#dni').val();

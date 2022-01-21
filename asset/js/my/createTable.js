@@ -437,7 +437,7 @@ function generarUsuarioConfigData(data) {
                                     </button>
                                 </div>
                                 <div class="col-sm-4">
-                                    <button type="button" class="btn btn-circle btn-mn btn-danger" onclick="deletePremio('${d["FECHADESDE"]}');">
+                                    <button type="button" class="btn btn-circle btn-mn btn-danger" onclick="deleteUsuarioConf('${d["USUARIO"]}');">
                                         <i class="icons icon-trash"></i>
                                     </button>
                                 </div>
